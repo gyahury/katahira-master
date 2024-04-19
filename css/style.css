@@ -1,0 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.quizBtn {
+    @apply flex-auto w-5/12 mx-2 my-2 px-0 py-5 text-center bg-gray-200 border border-gray-300 rounded text-2xl cursor-pointer hover:bg-gray-300;
+}
