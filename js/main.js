@@ -196,11 +196,11 @@ function useTts(character) {
   if ('speechSynthesis' in window) {
     let msg = new SpeechSynthesisUtterance(character);
     msg.lang = 'ja-JP';
-    msg.rate = 0.2;
+    msg.rate = 0.4;
     msg.pitch = 1.0;
     window.speechSynthesis.speak(msg);
   } else {
-    alert('Your browser does not support the Web Speech');
+    alert('Your browser does not support the Web Speech API.\nWe recommend using the Chrome browser.');
   }
 }
 
@@ -214,16 +214,32 @@ function shuffle(array) {
 
 function createSoundIcon(character) {
   const container = document.getElementById('soundIconContainer');
-
   container.innerHTML = '';
-  const soundIcon = document.createElement('img');
-  soundIcon.src = '../assets/images/sound.png';
-  soundIcon.alt = 'Play Sound';
-  soundIcon.className = 'cursor-pointer w-5 h-5 inline-block';
-  soundIcon.id = 'soundIcon';
+  const soundIcon = document.createElementNS(
+    'http://www.w3.org/2000/svg',
+    'svg'
+  );
+  soundIcon.setAttribute(
+    'class',
+    'w-6 h-6 text-gray-800 dark:text-white cursor-pointer inline-block'
+  );
+  soundIcon.setAttribute('aria-hidden', 'true');
+  soundIcon.setAttribute('fill', 'none');
+
+  const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+  path.setAttribute('stroke', 'currentColor');
+  path.setAttribute('stroke-linecap', 'round');
+  path.setAttribute('stroke-linejoin', 'round');
+  path.setAttribute('stroke-width', '1.5');
+  path.setAttribute(
+    'd',
+    'M15.5 8.43A4.985 4.985 0 0 1 17 12a4.984 4.984 0 0 1-1.43 3.5m2.794 2.864A8.972 8.972 0 0 0 21 12a8.972 8.972 0 0 0-2.636-6.364M12 6.135v11.73a1 1 0 0 1-1.64.768L6 15H4a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1h2l4.36-3.633a1 1 0 0 1 1.64.768Z'
+  );
+  soundIcon.appendChild(path);
 
   soundIcon.addEventListener('click', function () {
     useTts(character);
   });
+
   container.appendChild(soundIcon);
 }
