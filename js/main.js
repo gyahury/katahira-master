@@ -238,7 +238,7 @@ function createSoundIcon(character) {
   soundIcon.appendChild(path);
 
   soundIcon.addEventListener('click', function () {
-    useTts(character);
+    useTts(character+', ');
   });
 
   container.appendChild(soundIcon);
